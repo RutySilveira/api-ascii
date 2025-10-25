@@ -1,14 +1,9 @@
 import type { Application } from "express";
 import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import swaggerJsdoc from "swagger-jsdoc";
 
 export function setupSwagger(app: Application) {
-  const specs = swaggerJSDoc({
+  const specs = swaggerJsdoc({
     definition: {
       openapi: "3.0.0",
       info: {
@@ -16,11 +11,14 @@ export function setupSwagger(app: Application) {
         version: "1.0.0",
         description: "API documentation for products",
       },
+      servers: [
+        {
+          url: "http://localhost:3000",
+          description: "Local Server",
+        },
+      ],
     },
-    apis: [
-      path.join(__dirname, "../routes/*.ts"),
-      path.join(__dirname, "../controllers/*.ts"),
-    ],
+    apis: ["./src/routes/*.ts"],
   });
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));

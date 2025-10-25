@@ -4,113 +4,127 @@ import GetProductController from "../controllers/get-product-controller.js";
 import UpdateProductController from "../controllers/update-product-controller.js";
 import DeleteProductController from "../controllers/delete-product-controller.js";
 import ListProductController from "../controllers/list-product-controller.js";
+import { validateSchema } from "../middlewares/validate-schema.js";
+import { createProductSchema } from "../dtos/create-product-dto.js";
+import { updateProductSchema } from "../dtos/update-product-dto.js";
 
 const router = Router();
 
+const listProductController = new ListProductController();
+const createProductController = new CreateProductController();
+const getProductController = new GetProductController();
+const updateProductController = new UpdateProductController();
+const deleteProductController = new DeleteProductController();
+
 /**
- * @openapi
+ * @swagger
+ * components:
+ *   schemas:
+ *     ProductInput:
+ *       type: object
+ *       required:
+ *         - name
+ *         - price
+ *         - category
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: Smart TV 4K
+ *         price:
+ *           type: number
+ *           format: float
+ *           description: Must be greater than zero
+ *           example: 1250.50
+ *         category:
+ *           type: string
+ *           example: Electronics
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Products
+ *     description: Product management
+ */
+
+/**
+ * @swagger
  * /products:
+ *   get:
+ *     summary: List all products
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: Product list returned successfully
  *   post:
  *     summary: Create a new product
+ *     tags: [Products]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               price:
- *                 type: number
- *               category:
- *                 type: string
+ *             $ref: '#/components/schemas/ProductInput'
  *     responses:
  *       201:
  *         description: Product created successfully
  */
-router.post("/products", (req, res, next) =>
-  new CreateProductController().handle(req, res, next)
-);
+router
+  .route("/products")
+  .get(listProductController.handle.bind(listProductController))
+  .post(
+    validateSchema(createProductSchema),
+    createProductController.handle.bind(createProductController)
+  );
 
 /**
- * @openapi
+ * @swagger
  * /products/{id}:
+ *   parameters:
+ *     - in: path
+ *       name: id
+ *       required: true
+ *       schema:
+ *         type: string
+ *       description: Product ID
  *   get:
- *     summary: Get product by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     summary: Get a product by ID
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: Product found
  *       404:
  *         description: Product not found
- */
-router.get("/products/:id", (req, res, next) =>
-  new GetProductController().handle(req, res, next)
-);
-
-/**
- * @openapi
- * /products/{id}:
  *   put:
- *     summary: Update product by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     summary: Update a product by ID
+ *     tags: [Products]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               price:
- *                 type: number
- *               category:
- *                 type: string
+ *             $ref: '#/components/schemas/ProductInput'
  *     responses:
  *       200:
  *         description: Product updated successfully
  *       404:
  *         description: Product not found
- */
-router.put("/products/:id", (req, res, next) =>
-  new UpdateProductController().handle(req, res, next)
-);
-
-/**
- * @openapi
- * /products/{id}:
  *   delete:
- *     summary: Delete product by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     summary: Delete a product by ID
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: Product deleted successfully
  *       404:
  *         description: Product not found
  */
-router.delete("/products/:id", (req, res, next) =>
-  new DeleteProductController().handle(req, res, next)
-);
-
-router.get("/products", (req, res, next) =>
-  new ListProductController().handle(req, res, next)
-);
+router
+  .route("/products/:id")
+  .get(getProductController.handle.bind(getProductController))
+  .delete(deleteProductController.handle.bind(deleteProductController))
+  .put(
+    validateSchema(updateProductSchema),
+    updateProductController.handle.bind(updateProductController)
+  );
 
 export default router;
