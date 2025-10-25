@@ -7,9 +7,8 @@ export default class GetProductController {
     try {
       const productId = req.params.id as string;
       const getProductService = new GetProductService();
-      const product: ProductResponseDTO = await getProductService.execute(
-        productId
-      );
+      const product: ProductResponseDTO | null =
+        await getProductService.execute(productId);
 
       if (!product) {
         return res.status(404).json({ message: "Product not found." });
