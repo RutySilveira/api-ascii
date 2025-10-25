@@ -1,0 +1,145 @@
+type: collection.insomnia.rest/5.0
+name: Products API collection
+meta:
+  id: wrk_2860f6846db24979a97481f41d38be54
+  created: 1761361834241
+  modified: 1761361858610
+  description: ""
+collection:
+  - url: http://localhost:3000/products
+    name: CREATE Product
+    meta:
+      id: req_98cd2c3af9304814aad89b2a3ee5126f
+      created: 1761361870202
+      modified: 1761361923789
+      isPrivate: false
+      description: ""
+      sortKey: -1761361870202
+    method: POST
+    body:
+      text: '{ 	"name": "Nutella", 	"price": 10.0, 	"category": "Alimentos" }'
+      mimeType: application/json
+    headers:
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyBGcmFnYSIsImVtYWlsIjoibWF0aGV1c0B0ZXN0ZS5jb20iLCJpYXQiOjE3NjExODkyNDMsImV4cCI6MTc2Mzc4MTI0Mywic3ViIjoiMTE5YjE4ZWQtOTM3ZC00NTI3LTk3ZjItYTc1OTEyOTZiZjI0In0.Um7cwWlMTLZR0fFjIRTQ9_cLvmF7WmdphUl5FXQS1Po
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/products/387d2f20-2bf4-443e-a6fa-5a310edbce68
+    name: UPDATE Product
+    meta:
+      id: req_e6945727596d43d680347a68b32ddc06
+      created: 1761361900218
+      modified: 1761361908665
+      isPrivate: false
+      description: ""
+      sortKey: -1761361900218
+    method: PUT
+    body:
+      text: '{ 	"name": "Nutella", 	"price": 38.0, 	"category": "Alimentos" }'
+      mimeType: application/json
+    headers:
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyBGcmFnYSIsImVtYWlsIjoibWF0aGV1c0B0ZXN0ZS5jb20iLCJpYXQiOjE3NjExODkyNDMsImV4cCI6MTc2Mzc4MTI0Mywic3ViIjoiMTE5YjE4ZWQtOTM3ZC00NTI3LTk3ZjItYTc1OTEyOTZiZjI0In0.Um7cwWlMTLZR0fFjIRTQ9_cLvmF7WmdphUl5FXQS1Po
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.6.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/products/387d2f20-2bf4-443e-a6fa-5a310edbce68
+    name: DELETE Product
+    meta:
+      id: req_76d7677c05eb46ff9d773828aced86d5
+      created: 1761361946457
+      modified: 1761361952788
+      isPrivate: false
+      description: ""
+      sortKey: -1761361946457
+    method: DELETE
+    headers:
+      - name: Authorization
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyBGcmFnYSIsImVtYWlsIjoibWF0aGV1c0B0ZXN0ZS5jb20iLCJpYXQiOjE3NjExODkyNDMsImV4cCI6MTc2Mzc4MTI0Mywic3ViIjoiMTE5YjE4ZWQtOTM3ZC00NTI3LTk3ZjItYTc1OTEyOTZiZjI0In0.Um7cwWlMTLZR0fFjIRTQ9_cLvmF7WmdphUl5FXQS1Po
+      - name: User-Agent
+        value: insomnia/11.6.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/products
+    name: LIST Products
+    meta:
+      id: req_1f56fa4c21db48f8a41b2689bc1e30d2
+      created: 1761362047530
+      modified: 1761362090432
+      isPrivate: false
+      description: ""
+      sortKey: -1761362047530
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/products/2c006719-4e26-48bd-9e7b-f48445ab1e0f
+    name: GET Product
+    meta:
+      id: req_fcf995cb5fe6457284f912e88c26822b
+      created: 1761362084407
+      modified: 1761362103522
+      isPrivate: false
+      description: ""
+      sortKey: -1761361996993.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.6.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c6a44e6506f172ebb1e2b8272cf9f36bbb233f74
+    created: 1761361834254
+    modified: 1761361834254
+environments:
+  name: Base Environment
+  meta:
+    id: env_c6a44e6506f172ebb1e2b8272cf9f36bbb233f74
+    created: 1761361834250
+    modified: 1761361834250
+    isPrivate: false
